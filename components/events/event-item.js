@@ -1,19 +1,21 @@
 import Link from 'next/link';
 
-const Eventitem = (props) => {
+const EventItem = (props) => {
   const { title, image, date, location, id } = props;
-  const readableDate = new date(date).toLocalDate('en-US', {
+  const readableDate = new Date(date).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   });
   const formatedAddress = location.replace(', ', '\n');
+
+  const exploreLink = `/events/${id}`;
   return (
     <li>
-      <img />
+      <img src={'/' + image} alt={title} />
       <div>
         <div>
-          <h2>Title</h2>
+          <h2>{title}</h2>
           <div>
             <time>{readableDate}</time>
           </div>
@@ -22,11 +24,11 @@ const Eventitem = (props) => {
           </div>
         </div>
         <div>
-          <Link href='/'>Explore Event</Link>
+          <Link href={exploreLink}>Explore Event</Link>
         </div>
       </div>
     </li>
   );
 };
 
-export default Eventitem;
+export default EventItem;
